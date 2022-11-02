@@ -9,4 +9,5 @@ target 'PircterestGallery' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'Kingfisher', '~> 7.0'
+  pod 'KakaoSDK'
 end

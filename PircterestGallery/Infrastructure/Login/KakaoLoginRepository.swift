@@ -10,7 +10,7 @@ import Foundation
 class KakaoLoginRepository: LoginRepository {
     
     func login() {
-        
+        print("KAKAO")
     }
     
     

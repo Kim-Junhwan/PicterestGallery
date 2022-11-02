@@ -29,7 +29,7 @@ final class DefaultLoginViewModel {
 extension DefaultLoginViewModel: LoginViewModel {
     
     func didLogin(loginRepository: LoginRepository) {
-        loginRepository.login()
+        loginUseCase.login(loginRepository: loginRepository)
     }
     
 }

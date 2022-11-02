@@ -20,10 +20,18 @@ final class LoginDIContainer {
     func makeLoginUseCase() -> LoginUseCase {
         return DefaultLoginUseCase()
     }
+    
+    func makeKakaoLoginRepository() -> KakaoLoginRepository {
+        return KakaoLoginRepository()
+    }
+    
+    func makeGoogleLoginRepository() -> GoogleLoginRepository {
+        return GoogleLoginRepository()
+    }
 }
 
 extension LoginDIContainer: LoginFlowCoordinatorDependencies {
     func makeLoginViewController() -> LoginViewController {
-        LoginViewController.create(loginViewModel: makeLoginViewModel())
+        LoginViewController.create(loginViewModel: makeLoginViewModel(), kakaoLoginRepository: makeKakaoLoginRepository(), googleLoginRepository: makeGoogleLoginRepository())
     }
 }
