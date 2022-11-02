@@ -6,11 +6,22 @@
 //
 
 import Foundation
+import KakaoSDKUser
 
 class KakaoLoginRepository: LoginRepository {
     
     func login() {
-        print("KAKAO")
+        UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("loginWithKakaoAccount() success.")
+
+                    //do something
+                    _ = oauthToken
+                }
+            }
     }
     
     

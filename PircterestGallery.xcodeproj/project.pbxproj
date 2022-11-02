@@ -50,6 +50,7 @@
 		C7498B8C290F83990010882F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		C7498B90290F84870010882F /* KakaoLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginRepository.swift; sourceTree = "<group>"; };
 		C7498B952912A4260010882F /* GoogleLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginRepository.swift; sourceTree = "<group>"; };
+		C7498B972912C9560010882F /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		C7F77A3C28A162A600C2F947 /* PircterestGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PircterestGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F77A3F28A162A600C2F947 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7F77A4128A162A600C2F947 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -249,6 +250,7 @@
 				C7F77A4828A162A700C2F947 /* Assets.xcassets */,
 				C7F77A4A28A162A700C2F947 /* LaunchScreen.storyboard */,
 				C7F77A4D28A162A700C2F947 /* Info.plist */,
+				C7498B972912C9560010882F /* Config.xcconfig */,
 			);
 			path = PircterestGallery;
 			sourceTree = "<group>";
@@ -404,6 +406,7 @@
 /* Begin XCBuildConfiguration section */
 		C7F77A4E28A162A700C2F947 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4906D2C9614A9E00A7E3BFAF /* Pods-PircterestGallery.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -464,6 +467,7 @@
 		};
 		C7F77A4F28A162A700C2F947 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C83E1698022D83E0323AB25 /* Pods-PircterestGallery.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
