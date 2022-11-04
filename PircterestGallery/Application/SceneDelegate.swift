@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let navigationController = UINavigationController()
             self.window?.rootViewController = navigationController
             
-            appFlowCoordinator = AppFlowCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)//AppFlowCoordinator(appDIContainer: appDIContainer, navigationController: navigationController)
+            appFlowCoordinator = AppFlowCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
             appFlowCoordinator?.start()
             
             self.window?.makeKeyAndVisible()
@@ -60,13 +60,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-                if let url = URLContexts.first?.url {
-                    if (AuthApi.isKakaoTalkLoginUrl(url)) {
-                        _ = AuthController.handleOpenUrl(url: url)
-                    }
+            if let url = URLContexts.first?.url {
+                if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                    _ = AuthController.handleOpenUrl(url: url)
                 }
             }
-    }
+        }
 }
 

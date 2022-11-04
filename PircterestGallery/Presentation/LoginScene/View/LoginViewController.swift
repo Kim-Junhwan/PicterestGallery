@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import GoogleSignIn
 
 final class LoginViewController: UIViewController, StoryboardInstatiable {
     
@@ -14,7 +15,9 @@ final class LoginViewController: UIViewController, StoryboardInstatiable {
     private var kakaoLoginRepository: KakaoLoginRepository?
     private var googleLoginRepository: GoogleLoginRepository?
     
+    @IBOutlet weak var googleLoginButton: GIDSignInButton!
     @IBOutlet weak var loginButtonStackView: UIStackView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +34,12 @@ final class LoginViewController: UIViewController, StoryboardInstatiable {
     
     @IBAction func kakaoLoginButtonPressed(_ sender: UIButton) {
         guard let kakaoLoginRepository = kakaoLoginRepository else {return}
-        loginViewModel?.didLogin(loginRepository: kakaoLoginRepository)
+        loginViewModel?.didLogin(loginRepository: kakaoLoginRepository, vc: nil)
     }
     
     
     @IBAction func googleLoginButtonPressed(_ sender: UIButton) {
         guard let googleLoginRepository = googleLoginRepository else {return}
-        loginViewModel?.didLogin(loginRepository: googleLoginRepository)
+        loginViewModel?.didLogin(loginRepository: googleLoginRepository, vc: self)
     }
 }

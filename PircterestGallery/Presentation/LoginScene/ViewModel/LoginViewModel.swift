@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import UIKit
 
 protocol LoginViewModelInput {
-    func didLogin(loginRepository: LoginRepository)
+    func didLogin(loginRepository: LoginRepository, vc: UIViewController?)
 }
 
 protocol LoginViewModelOutput {
@@ -28,8 +29,8 @@ final class DefaultLoginViewModel {
 
 extension DefaultLoginViewModel: LoginViewModel {
     
-    func didLogin(loginRepository: LoginRepository) {
-        loginUseCase.login(loginRepository: loginRepository)
+    func didLogin(loginRepository: LoginRepository, vc: UIViewController? = nil) {
+        loginUseCase.login(loginRepository: loginRepository, vc: vc)
     }
     
 }

@@ -10,6 +10,7 @@ target 'PircterestGallery' do
   pod 'RxCocoa'
   pod 'Kingfisher', '~> 7.0'
   pod 'KakaoSDK'
+  pod 'GoogleSignIn'
 post_install do |installer|
   installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|

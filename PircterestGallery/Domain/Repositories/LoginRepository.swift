@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import UIKit
 
 protocol LoginRepository {
-    func login()
+    func login(vc: UIViewController?)
 }
+

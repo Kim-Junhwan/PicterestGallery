@@ -6,16 +6,21 @@
 //
 
 import Foundation
+import UIKit
 
 protocol LoginUseCase {
-    func login(loginRepository: LoginRepository)
+    func login(loginRepository: LoginRepository, vc: UIViewController?)
 }
 
 final class DefaultLoginUseCase: LoginUseCase {
     private var loginRepository: LoginRepository?
 
-    func login(loginRepository: LoginRepository) {
+    func login(loginRepository: LoginRepository, vc: UIViewController? = nil) {
         self.loginRepository = loginRepository
-        loginRepository.login()
+        if vc != nil {
+            loginRepository.login(vc: vc)
+        } else {
+            loginRepository.login(vc: nil)
+        }
     }
 }

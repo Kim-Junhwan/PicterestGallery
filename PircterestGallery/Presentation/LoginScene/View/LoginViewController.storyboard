@@ -28,7 +28,7 @@
                                             <action selector="kakaoLoginButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9v3-Mw-QgT"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWJ-dQ-c8h">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWJ-dQ-c8h" customClass="GIDSignInButton">
                                         <rect key="frame" x="7.3333333333333393" y="54.333333333333371" width="53.666666666666657" height="34.333333333333343"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="구글"/>
@@ -53,6 +53,7 @@
                     </view>
                     <connections>
                         <outlet property="LoginButtonStackView" destination="CT6-wE-PvM" id="EdD-yK-ePV"/>
+                        <outlet property="googleLoginButton" destination="qWJ-dQ-c8h" id="lsi-a6-HBs"/>
                         <outlet property="loginButtonStackView" destination="CT6-wE-PvM" id="fP6-ws-fT0"/>
                     </connections>
                 </viewController>

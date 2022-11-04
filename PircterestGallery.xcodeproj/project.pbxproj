@@ -23,6 +23,7 @@
 		C7498B8D290F83990010882F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498B8C290F83990010882F /* LoginViewModel.swift */; };
 		C7498B91290F84870010882F /* KakaoLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498B90290F84870010882F /* KakaoLoginRepository.swift */; };
 		C7498B962912A4260010882F /* GoogleLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498B952912A4260010882F /* GoogleLoginRepository.swift */; };
+		C7498BA02914C44B0010882F /* GoogleLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498B9F2914C44B0010882F /* GoogleLoginButton.swift */; };
 		C7F77A4028A162A600C2F947 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F77A3F28A162A600C2F947 /* AppDelegate.swift */; };
 		C7F77A4228A162A600C2F947 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F77A4128A162A600C2F947 /* SceneDelegate.swift */; };
 		C7F77A4928A162A700C2F947 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F77A4828A162A700C2F947 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		C7498B90290F84870010882F /* KakaoLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLoginRepository.swift; sourceTree = "<group>"; };
 		C7498B952912A4260010882F /* GoogleLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginRepository.swift; sourceTree = "<group>"; };
 		C7498B972912C9560010882F /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		C7498B9F2914C44B0010882F /* GoogleLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginButton.swift; sourceTree = "<group>"; };
 		C7F77A3C28A162A600C2F947 /* PircterestGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PircterestGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F77A3F28A162A600C2F947 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7F77A4128A162A600C2F947 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				C7498B8B290F838A0010882F /* ViewModel */,
 				C7498B8A290F83800010882F /* View */,
 				C7498B87290F716F0010882F /* Flows */,
+				C7498B9F2914C44B0010882F /* GoogleLoginButton.swift */,
 			);
 			path = LoginScene;
 			sourceTree = "<group>";
@@ -273,6 +276,8 @@
 			dependencies = (
 			);
 			name = PircterestGallery;
+			packageProductDependencies = (
+			);
 			productName = PircterestGallery;
 			productReference = C7F77A3C28A162A600C2F947 /* PircterestGallery.app */;
 			productType = "com.apple.product-type.application";
@@ -301,6 +306,8 @@
 				Base,
 			);
 			mainGroup = C7F77A3328A162A600C2F947;
+			packageReferences = (
+			);
 			productRefGroup = C7F77A3D28A162A600C2F947 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -370,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7498BA02914C44B0010882F /* GoogleLoginButton.swift in Sources */,
 				C7498B82290EEB340010882F /* LoginViewController.swift in Sources */,
 				C7498B86290EEF190010882F /* StoryboardInsantiable.swift in Sources */,
 				C7498B6D290EC7EA0010882F /* ImagesRepository.swift in Sources */,
@@ -522,7 +530,7 @@
 		};
 		C7F77A5128A162A700C2F947 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4906D2C9614A9E00A7E3BFAF /* Pods-PircterestGallery.debug.xcconfig */;
+			baseConfigurationReference = C7498B972912C9560010882F /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
