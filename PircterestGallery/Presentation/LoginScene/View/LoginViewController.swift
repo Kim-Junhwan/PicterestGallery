@@ -11,7 +11,7 @@ import GoogleSignIn
 
 final class LoginViewController: UIViewController, StoryboardInstatiable {
     
-    private var loginViewModel: LoginViewModel?
+    var loginViewModel: LoginViewModel?
     private var kakaoLoginRepository: KakaoLoginRepository?
     private var googleLoginRepository: GoogleLoginRepository?
     

@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 
+protocol LoginFlowCoordinatorDelegate {
+    func showTabBarView()
+}
+
 protocol LoginFlowCoordinatorDependencies {
-    func makeLoginViewController() -> LoginViewController
+    func makeLoginViewController(coordinator: LoginFlowCoordinator) -> LoginViewController
 }
 
 final class LoginFlowCoordinator: Coordinator {
@@ -18,6 +22,7 @@ final class LoginFlowCoordinator: Coordinator {
     var loginViewController: LoginViewController?
     
     let dependencies: LoginFlowCoordinatorDependencies
+    var delegate: LoginFlowCoordinatorDelegate?
     
     init(navigationController: UINavigationController, dependencies: LoginFlowCoordinatorDependencies) {
         self.navigationController = navigationController
@@ -25,9 +30,16 @@ final class LoginFlowCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = dependencies.makeLoginViewController()
+        let vc = dependencies.makeLoginViewController(coordinator: self)
         navigationController.pushViewController(vc, animated: true)
         loginViewController = vc
+    }
+}
+
+extension LoginFlowCoordinator: LoginViewModelDelegate {
+    func successLogin() {
+        print("SUCCESS LOGIN")
+        delegate?.showTabBarView()
     }
     
     

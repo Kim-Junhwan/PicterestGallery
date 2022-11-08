@@ -9,18 +9,34 @@ import Foundation
 import UIKit
 
 protocol LoginUseCase {
-    func login(loginRepository: LoginRepository, vc: UIViewController?)
+    func excute(loginRepository: LoginRepository, vc: UIViewController?, completion: @escaping (Result<User, Error>)->())
+}
+
+protocol LogoutUseCase {
+    func excute()
 }
 
 final class DefaultLoginUseCase: LoginUseCase {
     private var loginRepository: LoginRepository?
 
-    func login(loginRepository: LoginRepository, vc: UIViewController? = nil) {
+    func excute(loginRepository: LoginRepository, vc: UIViewController? = nil, completion: @escaping (Result<User, Error>)->()) {
         self.loginRepository = loginRepository
-        if vc != nil {
-            loginRepository.login(vc: vc)
-        } else {
-            loginRepository.login(vc: nil)
-        }
+        self.loginRepository?.login(vc: vc, completion: { result in
+            switch result {
+            case .success(let user):
+                completion(.success(user))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
     }
+}
+
+final class DefaultLogoutUseCase: LogoutUseCase {
+    private var loginRepository: LoginRepository?
+    
+    func excute() {
+        loginRepository?.logout()
+    }
+    
 }

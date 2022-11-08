@@ -9,12 +9,16 @@ import Foundation
 import UIKit
 
 final class LoginDIContainer {
-    func makeLoginFlowCoordinator(navigationController: UINavigationController) -> Coordinator {
+    func makeLoginFlowCoordinator(navigationController: UINavigationController) -> LoginFlowCoordinator {
         return LoginFlowCoordinator(navigationController: navigationController, dependencies: self)
     }
     
-    func makeLoginViewModel() -> LoginViewModel {
-        return DefaultLoginViewModel(loginUseCase: makeLoginUseCase())
+    func makeLoginViewModel(coordinator: LoginFlowCoordinator) -> LoginViewModel {
+        return DefaultLoginViewModel(loginUseCase: makeLoginUseCase(), delegate: coordinator)
+    }
+    
+    func makeLogoutUseCase() -> LogoutUseCase {
+        return DefaultLogoutUseCase()
     }
     
     func makeLoginUseCase() -> LoginUseCase {
@@ -31,7 +35,7 @@ final class LoginDIContainer {
 }
 
 extension LoginDIContainer: LoginFlowCoordinatorDependencies {
-    func makeLoginViewController() -> LoginViewController {
-        LoginViewController.create(loginViewModel: makeLoginViewModel(), kakaoLoginRepository: makeKakaoLoginRepository(), googleLoginRepository: makeGoogleLoginRepository())
+    func makeLoginViewController(coordinator: LoginFlowCoordinator) -> LoginViewController {
+        LoginViewController.create(loginViewModel: makeLoginViewModel(coordinator: coordinator), kakaoLoginRepository: makeKakaoLoginRepository(), googleLoginRepository: makeGoogleLoginRepository())
     }
 }

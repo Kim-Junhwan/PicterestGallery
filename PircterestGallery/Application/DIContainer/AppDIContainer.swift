@@ -11,4 +11,8 @@ final class AppDIContainer {
     func makeLoginDIContainer() -> LoginDIContainer {
         return LoginDIContainer()
     }
+    
+    func makeTabBarDIContainer() -> TabBarDIContainer {
+        return TabBarDIContainer()
+    }
 }

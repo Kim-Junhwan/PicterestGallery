@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 protocol LoginRepository {
-    func login(vc: UIViewController?)
+    typealias loginResult = (Result<User, Error>)->()
+    func login(vc: UIViewController?, completion: @escaping loginResult)
+    func logout()
+    func autoLogin(completion: @escaping loginResult)
+    func getUserInfo(completion: @escaping(User)->())
 }
-
