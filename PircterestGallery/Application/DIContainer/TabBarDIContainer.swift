@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class TabBarDIContainer {
-    func makeTabBarFlowCoordinator(navigationController: UINavigationController) -> TabBarCoordinator {
-        return TabBarCoordinator(navigationController: navigationController)
+    func makeTabBarFlowCoordinator(navigationController: UINavigationController, loginRepository: LoginRepository) -> TabBarCoordinator {
+        return TabBarCoordinator(navigationController: navigationController, loginRepository: loginRepository)
     }
 }

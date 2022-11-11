@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol LoginViewModelDelegate {
-    func successLogin()
+    func successLogin(loginRepository: LoginRepository)
 }
 
 protocol LoginViewModelInput {
@@ -37,11 +37,13 @@ final class DefaultLoginViewModel {
 extension DefaultLoginViewModel: LoginViewModel {
     
     func didLogin(loginRepository: LoginRepository, vc: UIViewController? = nil) {
-        loginRepository.login(vc: vc) { [weak self] result in
+        loginUseCase.excute(loginRepository: loginRepository, vc: vc) { [weak self] result in
+            print("viewModel repository: \(loginRepository)")
             switch result {
             case .success(let user):
-                print("ViewModel User:\(user)")
-                self?.delegate?.successLogin()
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                UserDefaults.standard.set("\(loginRepository.self)".split(separator: ".").last! ?? "", forKey: "lastLoginRepository")
+                self?.delegate?.successLogin(loginRepository: loginRepository)
             case .failure(let error):
                 print(error.localizedDescription)
             }

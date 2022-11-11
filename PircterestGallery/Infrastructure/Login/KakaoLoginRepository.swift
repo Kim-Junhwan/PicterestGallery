@@ -7,6 +7,8 @@
 
 import Foundation
 import KakaoSDKUser
+import KakaoSDKAuth
+import KakaoSDKCommon
 
 enum loginError: Error {
     case networkError
@@ -14,12 +16,11 @@ enum loginError: Error {
 }
 
 class KakaoLoginRepository: LoginRepository {
-    
     func login(vc: UIViewController?, completion: @escaping loginResult) {
         if (UserApi.isKakaoTalkLoginAvailable()) {
             kakaoAppLogin { result in
                 if result {
-                    self.getUserInfo { user in
+                    self.getUserInfo(vc: nil) { user in
                         completion(.success(user))
                     }
                 } else {
@@ -29,7 +30,7 @@ class KakaoLoginRepository: LoginRepository {
         } else {
             kakaoAccountLogin { result in
                 if result {
-                    self.getUserInfo { user in
+                    self.getUserInfo(vc: nil) { user in
                         completion(.success(user))
                     }
                 }
@@ -39,7 +40,29 @@ class KakaoLoginRepository: LoginRepository {
     }
     
     func autoLogin(completion: @escaping loginResult) {
-        
+        if (AuthApi.hasToken()) {
+            UserApi.shared.accessTokenInfo { (_, error) in
+                if let error = error {
+                    if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true  {
+                        //로그인 필요
+                        completion(.failure(error))
+                    }
+                    else {
+                        //기타 에러
+                        completion(.failure(error))
+                    }
+                }
+                else {
+                    //토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
+                    self.getUserInfo(vc: nil) { user in
+                        completion(.success(user))
+                    }
+                }
+            }
+        }
+        else {
+            //로그인 필요
+        }
     }
     
     func kakaoAppLogin(completion: @escaping (Bool)->()) {
@@ -74,7 +97,7 @@ class KakaoLoginRepository: LoginRepository {
             }
     }
     
-    func getUserInfo(completion: @escaping(User)->()) {
+    func getUserInfo(vc: UIViewController?, completion: @escaping (User) -> ()) {
         UserApi.shared.me() {(user, error) in
             if let error = error {
                 print(error)
@@ -82,7 +105,7 @@ class KakaoLoginRepository: LoginRepository {
             else {
                 print("me() success.")
                 //do something
-                completion(User(email: user?.kakaoAccount?.email ?? ""))
+                completion(User(email: user?.kakaoAccount?.name ?? ""))
             }
         }
     }
@@ -96,8 +119,5 @@ class KakaoLoginRepository: LoginRepository {
                 print("logout() success.")
             }
         }
-    }
-    
-    func autoLogin() {
     }
 }

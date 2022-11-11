@@ -13,5 +13,6 @@ protocol LoginRepository {
     func login(vc: UIViewController?, completion: @escaping loginResult)
     func logout()
     func autoLogin(completion: @escaping loginResult)
-    func getUserInfo(completion: @escaping(User)->())
+    func getUserInfo(vc: UIViewController?, completion: @escaping(User)->())
 }
+ 

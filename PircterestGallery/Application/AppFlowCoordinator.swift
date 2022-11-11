@@ -17,6 +17,7 @@ final class AppFlowCoordinator: Coordinator {
     var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
     var isLoggedIn: Bool = false
+    var loginRepository: LoginRepository?
     
     init(navigationController: UINavigationController, appDIContainer: AppDIContainer) {
         self.navigationController = navigationController
@@ -24,23 +25,35 @@ final class AppFlowCoordinator: Coordinator {
     }
     
     func start() {
+        print(UserDefaults.standard.bool(forKey: "isLoggedIn"))
+        print(UserDefaults.standard.string(forKey: "lastLoginRepository"))
         if UserDefaults.standard.bool(forKey: "isLoggedIn") {
-            let loginRepository = UserDefaults.standard.value(forKey: "loginRepository") as? LoginRepository
-            loginRepository?.autoLogin(completion: { result in
+            let loginRepositoryString = UserDefaults.standard.string(forKey: "lastLoginRepository")
+            
+            switch loginRepositoryString {
+            case "KakaoLoginRepository":
+                loginRepository = KakaoLoginRepository()
+            case "GoogleLoginRepository":
+                loginRepository = GoogleLoginRepository()
+            default:
+                print("error \(loginRepositoryString)")
+            }
+            guard let loginRepository = loginRepository else { return }
+            loginRepository.autoLogin(completion: { result in
                 switch result {
-                case.success(let uer):
-                    self.showTabBarView()
-                case .failure(let error):
+                case.success(_):
+                    self.showTabBarView(loginRepository: loginRepository)
+                case .failure(_):
                     self.showAuthentication()
                 }
             })
-            showTabBarView()
         } else {
             showAuthentication()
         }
     }
     
     func showAuthentication() {
+        print("SHOW LOGIN")
         let loginDIContainer = appDIContainer.makeLoginDIContainer()
         let flow = loginDIContainer.makeLoginFlowCoordinator(navigationController: navigationController)
         flow.delegate = self
@@ -50,12 +63,10 @@ final class AppFlowCoordinator: Coordinator {
 }
 
 extension AppFlowCoordinator: LoginFlowCoordinatorDelegate {
-    func showTabBarView() {
+    func showTabBarView(loginRepository: LoginRepository) {
         print("SHOW TABBAR")
         let tabBarDIContainer = appDIContainer.makeTabBarDIContainer()
-        let flow = tabBarDIContainer.makeTabBarFlowCoordinator(navigationController: navigationController)
+        let flow = tabBarDIContainer.makeTabBarFlowCoordinator(navigationController: navigationController, loginRepository: loginRepository)
         flow.start()
     }
-    
-   
 }

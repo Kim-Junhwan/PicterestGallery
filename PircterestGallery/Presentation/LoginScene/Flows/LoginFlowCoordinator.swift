@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol LoginFlowCoordinatorDelegate {
-    func showTabBarView()
+    func showTabBarView(loginRepository: LoginRepository)
 }
 
 protocol LoginFlowCoordinatorDependencies {
@@ -37,10 +37,8 @@ final class LoginFlowCoordinator: Coordinator {
 }
 
 extension LoginFlowCoordinator: LoginViewModelDelegate {
-    func successLogin() {
-        print("SUCCESS LOGIN")
-        delegate?.showTabBarView()
+    func successLogin(loginRepository: LoginRepository) {
+        delegate?.showTabBarView(loginRepository: loginRepository)
     }
-    
     
 }
