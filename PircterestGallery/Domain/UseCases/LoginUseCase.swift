@@ -13,7 +13,7 @@ protocol LoginUseCase {
 }
 
 protocol LogoutUseCase {
-    func excute()
+    func excute(completion: @escaping (Bool)->())
 }
 
 final class DefaultLoginUseCase: LoginUseCase {
@@ -35,8 +35,18 @@ final class DefaultLoginUseCase: LoginUseCase {
 final class DefaultLogoutUseCase: LogoutUseCase {
     private var loginRepository: LoginRepository?
     
-    func excute() {
-        loginRepository?.logout()
+    init(loginRepository: LoginRepository? = nil) {
+        self.loginRepository = loginRepository
+    }
+    
+    func excute(completion: @escaping (Bool)->()) {
+        loginRepository?.logout(completion: { isLogOutSuccess in
+            if isLogOutSuccess {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        })
     }
     
 }

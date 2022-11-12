@@ -7,12 +7,21 @@
 
 import UIKit
 
-class UserInfoViewController: UIViewController {
-
+class UserInfoViewController: UIViewController, StoryboardInstatiable {
+    
+    var userInfoViewModel: UserInfoViewModel?
+    @IBOutlet weak var userProfileLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+    }
+    
+    static func create(viewModel: UserInfoViewModel)-> UserInfoViewController {
+        let vc = UserInfoViewController.instantiateViewController()
+        vc.userInfoViewModel = viewModel
+        return vc
     }
     
 
@@ -26,4 +35,7 @@ class UserInfoViewController: UIViewController {
     }
     */
 
+    @IBAction func didTapLogout(_ sender: UIButton) {
+        userInfoViewModel?.didLogOut()
+    }
 }

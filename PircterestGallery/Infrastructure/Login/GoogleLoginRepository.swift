@@ -34,8 +34,10 @@ class GoogleLoginRepository: LoginRepository {
     
     let signInConfig = GIDConfiguration(clientID:  (Bundle.main.infoDictionary?["GOOGLE_NATIVE_APP_KEY"] ?? "") as! String )
     
-    func logout() {
-        
+    func logout(completion: @escaping (Bool)->()) {
+        print("Google Logout")
+        GIDSignIn.sharedInstance.signOut()
+        completion(true)
     }
     
     func autoLogin() {

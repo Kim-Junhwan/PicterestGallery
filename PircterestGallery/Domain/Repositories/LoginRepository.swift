@@ -11,7 +11,7 @@ import UIKit
 protocol LoginRepository {
     typealias loginResult = (Result<User, Error>)->()
     func login(vc: UIViewController?, completion: @escaping loginResult)
-    func logout()
+    func logout(completion: @escaping (Bool)->())
     func autoLogin(completion: @escaping loginResult)
     func getUserInfo(vc: UIViewController?, completion: @escaping(User)->())
 }

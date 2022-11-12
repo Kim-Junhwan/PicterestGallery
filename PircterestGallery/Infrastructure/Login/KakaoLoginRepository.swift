@@ -62,6 +62,7 @@ class KakaoLoginRepository: LoginRepository {
         }
         else {
             //로그인 필요
+            completion(.failure(loginError.tokkenError))
         }
     }
     
@@ -110,12 +111,13 @@ class KakaoLoginRepository: LoginRepository {
         }
     }
     
-    func logout() {
+    func logout(completion: @escaping (Bool) -> ()) {
         UserApi.shared.logout {(error) in
             if let error = error {
-                print(error)
+                completion(false)
             }
             else {
+                completion(true)
                 print("logout() success.")
             }
         }

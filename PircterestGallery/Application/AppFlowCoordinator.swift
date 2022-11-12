@@ -14,6 +14,9 @@ protocol Coordinator {
 }
 
 final class AppFlowCoordinator: Coordinator {
+    
+    var childCoordinators: [Coordinator] = []
+    
     var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
     var isLoggedIn: Bool = false
@@ -66,7 +69,13 @@ extension AppFlowCoordinator: LoginFlowCoordinatorDelegate {
     func showTabBarView(loginRepository: LoginRepository) {
         print("SHOW TABBAR")
         let tabBarDIContainer = appDIContainer.makeTabBarDIContainer()
-        let flow = tabBarDIContainer.makeTabBarFlowCoordinator(navigationController: navigationController, loginRepository: loginRepository)
+        let flow = tabBarDIContainer.makeTabBarFlowCoordinator(navigationController: navigationController, loginRepository: loginRepository, coordinator: self)
         flow.start()
+    }
+}
+
+extension AppFlowCoordinator: TabBarCoordinatorDelegate {
+    func showLoginView() {
+        showAuthentication()
     }
 }
