@@ -26,11 +26,6 @@ final class DefaultUserInfoViewModel: UserInfoViewModel {
     private let logoutUseCase: LogoutUseCase
     var delegate: UserInfoViewModelDelegate?
     let loginRepository: LoginRepository
-    var userProfile: String {
-        get {
-             return getUserInfo()
-        }
-    }
     
     init(logoutUseCase: LogoutUseCase, delegate: UserInfoViewModelDelegate, loginRepository: LoginRepository) {
         self.logoutUseCase = logoutUseCase
@@ -49,9 +44,5 @@ final class DefaultUserInfoViewModel: UserInfoViewModel {
         }
     }
     
-    func getUserInfo() -> String {
-        loginRepository.getUserInfo(vc: <#T##UIViewController?#>, completion: <#T##(User) -> ()#>)
-        return
-    }
     
 }

@@ -18,20 +18,20 @@ protocol LoginFlowCoordinatorDependencies {
 
 final class LoginFlowCoordinator: Coordinator {
     
-    var navigationController: UINavigationController
+    var window: UIWindow
     var loginViewController: LoginViewController?
     
     let dependencies: LoginFlowCoordinatorDependencies
     var delegate: LoginFlowCoordinatorDelegate?
     
-    init(navigationController: UINavigationController, dependencies: LoginFlowCoordinatorDependencies) {
-        self.navigationController = navigationController
+    init(window: UIWindow, dependencies: LoginFlowCoordinatorDependencies) {
+        self.window = window
         self.dependencies = dependencies
     }
     
     func start() {
         let vc = dependencies.makeLoginViewController(coordinator: self)
-        navigationController.viewControllers = [vc]
+        self.window.rootViewController = vc
         //navigationController.pushViewController(vc, animated: true)
         loginViewController = vc
     }

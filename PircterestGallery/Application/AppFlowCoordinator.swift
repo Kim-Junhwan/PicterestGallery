@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 protocol Coordinator {
-    var navigationController: UINavigationController { get set }
     func start()
 }
 
@@ -17,13 +16,13 @@ final class AppFlowCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     
-    var navigationController: UINavigationController
+    var window: UIWindow
     private let appDIContainer: AppDIContainer
     var isLoggedIn: Bool = false
     var loginRepository: LoginRepository?
     
-    init(navigationController: UINavigationController, appDIContainer: AppDIContainer) {
-        self.navigationController = navigationController
+    init(window: UIWindow, appDIContainer: AppDIContainer) {
+        self.window = window
         self.appDIContainer = appDIContainer
     }
     
@@ -58,7 +57,7 @@ final class AppFlowCoordinator: Coordinator {
     func showAuthentication() {
         print("SHOW LOGIN")
         let loginDIContainer = appDIContainer.makeLoginDIContainer()
-        let flow = loginDIContainer.makeLoginFlowCoordinator(navigationController: navigationController)
+        let flow = loginDIContainer.makeLoginFlowCoordinator(window: window)
         flow.delegate = self
         flow.start()
     }
@@ -69,7 +68,7 @@ extension AppFlowCoordinator: LoginFlowCoordinatorDelegate {
     func showTabBarView(loginRepository: LoginRepository) {
         print("SHOW TABBAR")
         let tabBarDIContainer = appDIContainer.makeTabBarDIContainer()
-        let flow = tabBarDIContainer.makeTabBarFlowCoordinator(navigationController: navigationController, loginRepository: loginRepository, coordinator: self)
+        let flow = tabBarDIContainer.makeTabBarFlowCoordinator(window: window, loginRepository: loginRepository, coordinator: self)
         flow.start()
     }
 }

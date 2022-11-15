@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 final class LoginDIContainer {
-    func makeLoginFlowCoordinator(navigationController: UINavigationController) -> LoginFlowCoordinator {
-        return LoginFlowCoordinator(navigationController: navigationController, dependencies: self)
+    func makeLoginFlowCoordinator(window: UIWindow) -> LoginFlowCoordinator {
+        return LoginFlowCoordinator(window: window, dependencies: self)
     }
     
     func makeLoginViewModel(coordinator: LoginFlowCoordinator) -> LoginViewModel {

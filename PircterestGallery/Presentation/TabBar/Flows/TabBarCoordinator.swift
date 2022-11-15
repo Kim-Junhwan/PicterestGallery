@@ -17,14 +17,14 @@ protocol TabBarCoordinatorDependencies {
 }
 
 final class TabBarCoordinator: Coordinator {
-    var navigationController: UINavigationController
+    var window: UIWindow
     var loginRepository: LoginRepository
     let dependencies: TabBarCoordinatorDependencies
     let userInfoDIContainer: UserInfoDIContainer
     var delegate: TabBarCoordinatorDelegate?
     
-    init(navigationController: UINavigationController, loginRepository: LoginRepository, dependencies: TabBarCoordinatorDependencies, userInfoDIContainer: UserInfoDIContainer, delegate: TabBarCoordinatorDelegate) {
-        self.navigationController = navigationController
+    init(window: UIWindow, loginRepository: LoginRepository, dependencies: TabBarCoordinatorDependencies, userInfoDIContainer: UserInfoDIContainer, delegate: TabBarCoordinatorDelegate) {
+        self.window = window
         self.loginRepository = loginRepository
         self.dependencies = dependencies
         self.userInfoDIContainer = userInfoDIContainer
@@ -32,7 +32,7 @@ final class TabBarCoordinator: Coordinator {
     }
     
     func start() {
-        navigationController.viewControllers = [setTabBarController()]
+        window.rootViewController = setTabBarController()
         //navigationController.pushViewController(setTabBarController(), animated: true)
         print("tabbarcoordinator \(loginRepository)")
     }
@@ -41,11 +41,15 @@ final class TabBarCoordinator: Coordinator {
         let tabBarController = dependencies.makeTabBarController()
         
         let userInfoItem = UITabBarItem(title: "UserInfo", image: nil, tag: 0)
+        let imageListItem = UITabBarItem(title: "Image", image: nil, tag: 1)
         
-        let userInfoFlowCoordinator = userInfoDIContainer.makeUserInfoCoordinator(navigationController: navigationController, loginRepository: loginRepository)
+        //let userInfoFlowCoordinator = userInfoDIContainer.makeUserInfoCoordinator(navigationController: navigationController, loginRepository: loginRepository)
         let userInfoViewController = userInfoDIContainer.makeUserInfoViewController(loginRepository: loginRepository, coordinator: self)
-        userInfoFlowCoordinator.navigationController.tabBarItem = userInfoItem
-        tabBarController.setViewControllers([userInfoViewController], animated: true)
+        
+        let imageListViewController = ImageListViewController()
+        
+        //userInfoFlowCoordinator.navigationController.tabBarItem = userInfoItem
+        tabBarController.setViewControllers([userInfoViewController, imageListViewController], animated: true)
         
         return tabBarController
     }
