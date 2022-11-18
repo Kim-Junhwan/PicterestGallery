@@ -13,15 +13,17 @@ class UserInfoDIContainer {
         return DefaultLogoutUseCase(loginRepository: loginRepository)
     }
     
-    func makeUserInfoCoordinator(navigationController: UINavigationController, loginRepository: LoginRepository) -> UserInfoFlowCoordinator {
-        return UserInfoFlowCoordinator(navigationController: navigationController, loginRepository: loginRepository)
+    func makeUserInfoCoordinator(loginRepository: LoginRepository, delegate: UserInfoFlowCoordinatorDelegate) -> UserInfoFlowCoordinator {
+        return UserInfoFlowCoordinator(navigationController: UINavigationController(), dependencies: self, loginRepository: loginRepository, delegate: delegate)
     }
     
-    func makeUserInfoViewModel(loginRepository: LoginRepository, coordinator: TabBarCoordinator) -> UserInfoViewModel {
+    private func makeUserInfoViewModel(loginRepository: LoginRepository, coordinator: UserInfoFlowCoordinator) -> UserInfoViewModel {
         return DefaultUserInfoViewModel(logoutUseCase: makeLogOutUseCase(loginRepository: loginRepository), delegate: coordinator, loginRepository: loginRepository)
     }
-    
-    func makeUserInfoViewController(loginRepository: LoginRepository, coordinator: TabBarCoordinator) -> UserInfoViewController {
+}
+
+extension UserInfoDIContainer: UserInfoFlowCoordinatorDependencies {
+    func makeUserInfoViewController(loginRepository: LoginRepository, coordinator: UserInfoFlowCoordinator) -> UserInfoViewController {
         return UserInfoViewController.create(viewModel: makeUserInfoViewModel(loginRepository: loginRepository, coordinator: coordinator))
     }
 }

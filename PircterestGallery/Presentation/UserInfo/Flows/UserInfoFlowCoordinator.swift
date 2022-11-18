@@ -8,22 +8,35 @@
 import Foundation
 import UIKit
 
-protocol UserInfoFlowCoordinatorDependencies {
-    
+protocol UserInfoFlowCoordinatorDelegate {
+    func goLoginView()
 }
 
-final class UserInfoFlowCoordinator: Coordinator {
+protocol UserInfoFlowCoordinatorDependencies {
+    func makeUserInfoViewController(loginRepository: LoginRepository, coordinator: UserInfoFlowCoordinator) -> UserInfoViewController
+}
+
+final class UserInfoFlowCoordinator: TabBarChildCoordinator {
     var navigationController: UINavigationController
-    private let loginRepository: LoginRepository
+    var loginRepository: LoginRepository
+    var dependencies: UserInfoFlowCoordinatorDependencies
+    var delegate: UserInfoFlowCoordinatorDelegate
     
-    init(navigationController: UINavigationController, loginRepository: LoginRepository) {
+    init(navigationController: UINavigationController, dependencies: UserInfoFlowCoordinatorDependencies, loginRepository: LoginRepository, delegate: UserInfoFlowCoordinatorDelegate) {
         self.navigationController = navigationController
+        self.dependencies = dependencies
         self.loginRepository = loginRepository
+        self.delegate = delegate
     }
     
     func start() {
-        
+        let userInfoController = dependencies.makeUserInfoViewController(loginRepository: loginRepository, coordinator: self)
+        navigationController.setViewControllers([userInfoController], animated: true)
     }
-    
-    
+}
+
+extension UserInfoFlowCoordinator: UserInfoViewModelDelegate {
+    func successLogOut() {
+        delegate.goLoginView()
+    }
 }

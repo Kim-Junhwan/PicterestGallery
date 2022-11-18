@@ -10,16 +10,20 @@ import UIKit
 
 class TabBarDIContainer {
     func makeTabBarFlowCoordinator(window: UIWindow, loginRepository: LoginRepository, coordinator: TabBarCoordinatorDelegate) -> TabBarCoordinator {
-        return TabBarCoordinator(window: window, loginRepository: loginRepository, dependencies: self, userInfoDIContainer: makeUserInfoDIContainer(), delegate: coordinator)
-    }
-    
-    func makeUserInfoDIContainer() -> UserInfoDIContainer {
-        return UserInfoDIContainer()
+        return TabBarCoordinator(window: window, loginRepository: loginRepository, dependencies: self, delegate: coordinator)
     }
     
 }
 
 extension TabBarDIContainer: TabBarCoordinatorDependencies {
+    func makeImageListDIContainer() -> ImageListDIContainer {
+        return ImageListDIContainer()
+    }
+    
+    func makeUserInfoDIConatiner() -> UserInfoDIContainer {
+        return UserInfoDIContainer()
+    }
+    
     func makeTabBarController() -> TabBarController {
         let tabBarController = TabBarController.instantiateViewController()
         

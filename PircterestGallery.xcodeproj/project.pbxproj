@@ -34,6 +34,10 @@
 		C7498BBC291F6B1D0010882F /* UserInfoViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7498BBB291F6B1D0010882F /* UserInfoViewController.storyboard */; };
 		C7498BC22923561A0010882F /* ImageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498BC12923561A0010882F /* ImageListViewController.swift */; };
 		C7498BC4292356620010882F /* ImageListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7498BC3292356620010882F /* ImageListViewController.storyboard */; };
+		C7498BC829252C860010882F /* ImageListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498BC729252C860010882F /* ImageListCollectionViewController.swift */; };
+		C7498C0629269DFE0010882F /* TabBarChildCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498C0529269DFE0010882F /* TabBarChildCoordinator.swift */; };
+		C7498C092926A1CC0010882F /* ImageListFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498C082926A1CC0010882F /* ImageListFlowCoordinator.swift */; };
+		C7498C0B2927447F0010882F /* ImageListDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498C0A2927447F0010882F /* ImageListDIContainer.swift */; };
 		C7F77A4028A162A600C2F947 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F77A3F28A162A600C2F947 /* AppDelegate.swift */; };
 		C7F77A4228A162A600C2F947 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F77A4128A162A600C2F947 /* SceneDelegate.swift */; };
 		C7F77A4928A162A700C2F947 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F77A4828A162A700C2F947 /* Assets.xcassets */; };
@@ -73,6 +77,10 @@
 		C7498BBB291F6B1D0010882F /* UserInfoViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserInfoViewController.storyboard; sourceTree = "<group>"; };
 		C7498BC12923561A0010882F /* ImageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewController.swift; sourceTree = "<group>"; };
 		C7498BC3292356620010882F /* ImageListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageListViewController.storyboard; sourceTree = "<group>"; };
+		C7498BC729252C860010882F /* ImageListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListCollectionViewController.swift; sourceTree = "<group>"; };
+		C7498C0529269DFE0010882F /* TabBarChildCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildCoordinator.swift; sourceTree = "<group>"; };
+		C7498C082926A1CC0010882F /* ImageListFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListFlowCoordinator.swift; sourceTree = "<group>"; };
+		C7498C0A2927447F0010882F /* ImageListDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListDIContainer.swift; sourceTree = "<group>"; };
 		C7F77A3C28A162A600C2F947 /* PircterestGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PircterestGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F77A3F28A162A600C2F947 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7F77A4128A162A600C2F947 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -187,6 +195,7 @@
 				C7498B7D290EE2910010882F /* LoginDIContainer.swift */,
 				C7498BA4291A2E8C0010882F /* TabBarDIContainer.swift */,
 				C7498BB6291EB5BD0010882F /* UserInfoDIContainer.swift */,
+				C7498C0A2927447F0010882F /* ImageListDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -253,7 +262,6 @@
 			isa = PBXGroup;
 			children = (
 				C7498BA8291ABB1D0010882F /* View */,
-				C7498BA7291ABB170010882F /* ViewModel */,
 				C7498BA6291ABAE00010882F /* Flows */,
 			);
 			path = TabBar;
@@ -263,15 +271,9 @@
 			isa = PBXGroup;
 			children = (
 				C7498BA2291812CB0010882F /* TabBarCoordinator.swift */,
+				C7498C0529269DFE0010882F /* TabBarChildCoordinator.swift */,
 			);
 			path = Flows;
-			sourceTree = "<group>";
-		};
-		C7498BA7291ABB170010882F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		C7498BA8291ABB1D0010882F /* View */ = {
@@ -329,6 +331,7 @@
 		C7498BBF292355E80010882F /* ImageList */ = {
 			isa = PBXGroup;
 			children = (
+				C7498C072926A1AD0010882F /* Flows */,
 				C7498BC0292355F90010882F /* View */,
 			);
 			path = ImageList;
@@ -339,8 +342,25 @@
 			children = (
 				C7498BC12923561A0010882F /* ImageListViewController.swift */,
 				C7498BC3292356620010882F /* ImageListViewController.storyboard */,
+				C7498BC629252C650010882F /* ImageListCollectionview */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C7498BC629252C650010882F /* ImageListCollectionview */ = {
+			isa = PBXGroup;
+			children = (
+				C7498BC729252C860010882F /* ImageListCollectionViewController.swift */,
+			);
+			path = ImageListCollectionview;
+			sourceTree = "<group>";
+		};
+		C7498C072926A1AD0010882F /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				C7498C082926A1CC0010882F /* ImageListFlowCoordinator.swift */,
+			);
+			path = Flows;
 			sourceTree = "<group>";
 		};
 		C7F77A3328A162A600C2F947 = {
@@ -514,6 +534,7 @@
 				C7498B71290EC8D40010882F /* LoginRepository.swift in Sources */,
 				C7F77A4228A162A600C2F947 /* SceneDelegate.swift in Sources */,
 				C7498BC22923561A0010882F /* ImageListViewController.swift in Sources */,
+				C7498C092926A1CC0010882F /* ImageListFlowCoordinator.swift in Sources */,
 				C7498B89290F717F0010882F /* LoginFlowCoordinator.swift in Sources */,
 				C7498BA3291812CB0010882F /* TabBarCoordinator.swift in Sources */,
 				C7498B6F290EC8830010882F /* ImageQuery.swift in Sources */,
@@ -522,7 +543,10 @@
 				C7498BB7291EB5BD0010882F /* UserInfoDIContainer.swift in Sources */,
 				C7498B68290EC6600010882F /* User.swift in Sources */,
 				C7498B74290ED08B0010882F /* LoginUseCase.swift in Sources */,
+				C7498C0B2927447F0010882F /* ImageListDIContainer.swift in Sources */,
+				C7498BC829252C860010882F /* ImageListCollectionViewController.swift in Sources */,
 				C7498BBA291EB7700010882F /* UserInfoFlowCoordinator.swift in Sources */,
+				C7498C0629269DFE0010882F /* TabBarChildCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
