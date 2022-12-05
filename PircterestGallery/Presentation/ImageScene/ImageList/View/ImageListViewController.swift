@@ -13,14 +13,17 @@ final class ImageListViewController: UIViewController, StoryboardInstatiable {
     @IBOutlet weak var searchBarContainer: UIView!
     @IBOutlet weak var imageCollectionContainer: UIView!
     private var searchController = UISearchController(searchResultsController: nil)
+    var viewModel: ImageListViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        viewModel?.showRecommendImage()
     }
     
-    static func create() -> ImageListViewController{
+    static func create(viewModel: ImageListViewModel) -> ImageListViewController{
         let view = ImageListViewController.instantiateViewController()
+        view.viewModel = viewModel
         return view
     }
     
@@ -46,7 +49,8 @@ extension ImageListViewController {
 
 extension ImageListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
+        guard let searchText = searchBar.text, !searchText.isEmpty else { return }
+        viewModel?.didSearch(query: searchText)
     }
 }
 

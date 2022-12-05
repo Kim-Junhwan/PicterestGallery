@@ -6,7 +6,9 @@ target 'PircterestGallery' do
   use_frameworks!
 
   # Pods for PircterestGallery
+  pod 'Alamofire'
   pod 'RxSwift'
+  pod 'Moya/RxSwift', '~> 15.0'
   pod 'RxCocoa'
   pod 'Kingfisher', '~> 7.0'
   pod 'KakaoSDK'

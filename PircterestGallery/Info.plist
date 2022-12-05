@@ -21,6 +21,10 @@
 			</array>
 		</dict>
 	</array>
+	<key>APIBASEURL</key>
+	<string>https://${API_BASE_URL}</string>
+	<key>PICTEREST_NATIVE_APP_KEY</key>
+	<string>${PICTEREST_NATIVE_APP_KEY}</string>
 	<key>KAKAO_NATIVE_APP_KEY</key>
 	<string>${KAKAO_NATIVE_APP_KEY}</string>
 	<key>GOOGLE_NATIVE_APP_KEY</key>
@@ -33,7 +37,7 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<false/>
+		<true/>
 	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

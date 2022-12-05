@@ -38,6 +38,10 @@
 		C7498C0629269DFE0010882F /* TabBarChildCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498C0529269DFE0010882F /* TabBarChildCoordinator.swift */; };
 		C7498C092926A1CC0010882F /* ImageListFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498C082926A1CC0010882F /* ImageListFlowCoordinator.swift */; };
 		C7498C0B2927447F0010882F /* ImageListDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498C0A2927447F0010882F /* ImageListDIContainer.swift */; };
+		C7498C0E2929411E0010882F /* ImageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498C0D2929411E0010882F /* ImageListViewModel.swift */; };
+		C7498C1029295BAE0010882F /* FetchRecommendImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498C0F29295BAE0010882F /* FetchRecommendImageUseCase.swift */; };
+		C75E1A3C2938FB9000778CD1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75E1A3B2938FB9000778CD1 /* NetworkService.swift */; };
+		C75E1A3F293D956100778CD1 /* ImagesResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75E1A3E293D956100778CD1 /* ImagesResponseDTO.swift */; };
 		C7F77A4028A162A600C2F947 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F77A3F28A162A600C2F947 /* AppDelegate.swift */; };
 		C7F77A4228A162A600C2F947 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F77A4128A162A600C2F947 /* SceneDelegate.swift */; };
 		C7F77A4928A162A700C2F947 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7F77A4828A162A700C2F947 /* Assets.xcassets */; };
@@ -81,6 +85,10 @@
 		C7498C0529269DFE0010882F /* TabBarChildCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarChildCoordinator.swift; sourceTree = "<group>"; };
 		C7498C082926A1CC0010882F /* ImageListFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListFlowCoordinator.swift; sourceTree = "<group>"; };
 		C7498C0A2927447F0010882F /* ImageListDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListDIContainer.swift; sourceTree = "<group>"; };
+		C7498C0D2929411E0010882F /* ImageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewModel.swift; sourceTree = "<group>"; };
+		C7498C0F29295BAE0010882F /* FetchRecommendImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecommendImageUseCase.swift; sourceTree = "<group>"; };
+		C75E1A3B2938FB9000778CD1 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		C75E1A3E293D956100778CD1 /* ImagesResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesResponseDTO.swift; sourceTree = "<group>"; };
 		C7F77A3C28A162A600C2F947 /* PircterestGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PircterestGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7F77A3F28A162A600C2F947 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7F77A4128A162A600C2F947 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				C7498B73290ED08B0010882F /* LoginUseCase.swift */,
+				C7498C0F29295BAE0010882F /* FetchRecommendImageUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -244,6 +253,7 @@
 		C7498B8E290F846B0010882F /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				C75E1A3A2938FB7C00778CD1 /* Network */,
 				C7498B8F290F84760010882F /* Login */,
 			);
 			path = Infrastructure;
@@ -331,6 +341,7 @@
 		C7498BBF292355E80010882F /* ImageList */ = {
 			isa = PBXGroup;
 			children = (
+				C7498C0C2929410F0010882F /* ViewModel */,
 				C7498C072926A1AD0010882F /* Flows */,
 				C7498BC0292355F90010882F /* View */,
 			);
@@ -361,6 +372,31 @@
 				C7498C082926A1CC0010882F /* ImageListFlowCoordinator.swift */,
 			);
 			path = Flows;
+			sourceTree = "<group>";
+		};
+		C7498C0C2929410F0010882F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C7498C0D2929411E0010882F /* ImageListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C75E1A3A2938FB7C00778CD1 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C75E1A3D293D953C00778CD1 /* DataMapping */,
+				C75E1A3B2938FB9000778CD1 /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C75E1A3D293D953C00778CD1 /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				C75E1A3E293D956100778CD1 /* ImagesResponseDTO.swift */,
+			);
+			path = DataMapping;
 			sourceTree = "<group>";
 		};
 		C7F77A3328A162A600C2F947 = {
@@ -524,13 +560,17 @@
 				C7498B79290ED3690010882F /* AppFlowCoordinator.swift in Sources */,
 				C7498B7B290ED4650010882F /* AppDIContainer.swift in Sources */,
 				C7498BB5291EABA50010882F /* UserInfoViewModel.swift in Sources */,
+				C7498C0E2929411E0010882F /* ImageListViewModel.swift in Sources */,
 				C7498B91290F84870010882F /* KakaoLoginRepository.swift in Sources */,
 				C7498B7E290EE2910010882F /* LoginDIContainer.swift in Sources */,
+				C75E1A3F293D956100778CD1 /* ImagesResponseDTO.swift in Sources */,
 				C7F77A4028A162A600C2F947 /* AppDelegate.swift in Sources */,
+				C75E1A3C2938FB9000778CD1 /* NetworkService.swift in Sources */,
 				C7498B962912A4260010882F /* GoogleLoginRepository.swift in Sources */,
 				C7498B6A290EC6D50010882F /* PicterestImage.swift in Sources */,
 				C7498BA5291A2E8C0010882F /* TabBarDIContainer.swift in Sources */,
 				C7498B8D290F83990010882F /* LoginViewModel.swift in Sources */,
+				C7498C1029295BAE0010882F /* FetchRecommendImageUseCase.swift in Sources */,
 				C7498B71290EC8D40010882F /* LoginRepository.swift in Sources */,
 				C7F77A4228A162A600C2F947 /* SceneDelegate.swift in Sources */,
 				C7498BC22923561A0010882F /* ImageListViewController.swift in Sources */,

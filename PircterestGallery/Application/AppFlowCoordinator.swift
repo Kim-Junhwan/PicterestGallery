@@ -44,6 +44,7 @@ final class AppFlowCoordinator: Coordinator {
             loginRepository.autoLogin(completion: { result in
                 switch result {
                 case.success(_):
+                    print("AUTOLOGIN SUCCESS")
                     self.showTabBarView(loginRepository: loginRepository)
                 case .failure(_):
                     self.showAuthentication()

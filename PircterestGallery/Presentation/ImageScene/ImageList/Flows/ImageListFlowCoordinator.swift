@@ -8,15 +8,21 @@
 import Foundation
 import UIKit
 
+protocol ImageListFlowCoordinatorDependencies {
+    func makeImageListViewController() -> ImageListViewController
+}
+
 final class ImageListFlowCoordinator: TabBarChildCoordinator {
     var navigationController: UINavigationController
+    var dependencies: ImageListFlowCoordinatorDependencies
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, dependencies: ImageListFlowCoordinatorDependencies) {
         self.navigationController = navigationController
+        self.dependencies = dependencies
     }
     
     func start() {
-        let imageListViewController = ImageListViewController.instantiateViewController()
+        let imageListViewController = dependencies.makeImageListViewController()
         navigationController.setViewControllers([imageListViewController], animated: true)
     }
     

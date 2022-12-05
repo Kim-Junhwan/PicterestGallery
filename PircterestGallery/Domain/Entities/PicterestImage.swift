@@ -8,5 +8,12 @@
 import Foundation
 
 struct PicterestImage: Identifiable {
-    let id: Int
+    let id: String
+    let width: Int
+    let height: Int
+    let imagePath: String
+}
+
+struct ImagesPage {
+    let images: [PicterestImage]
 }

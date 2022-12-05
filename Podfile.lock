@@ -50,6 +50,11 @@ PODS:
   - KakaoSDKUser (2.11.1):
     - KakaoSDKAuth (= 2.11.1)
   - Kingfisher (7.3.1)
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - Moya/RxSwift (15.0.0):
+    - Moya/Core
+    - RxSwift (~> 6.0)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -58,9 +63,11 @@ PODS:
   - RxSwift (6.5.0)
 
 DEPENDENCIES:
+  - Alamofire
   - GoogleSignIn
   - KakaoSDK
   - Kingfisher (~> 7.0)
+  - Moya/RxSwift (~> 15.0)
   - RxCocoa
   - RxSwift
 
@@ -82,6 +89,7 @@ SPEC REPOS:
     - KakaoSDKTemplate
     - KakaoSDKUser
     - Kingfisher
+    - Moya
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -103,10 +111,11 @@ SPEC CHECKSUMS:
   KakaoSDKTemplate: f8ee0b33f649e436c1aaf2a3a6bd6aa3dcae2451
   KakaoSDKUser: 08c0a4f40bebdebdf948a9e3d0e44ed5c2754f99
   Kingfisher: f411ab4902e733fc0c40522920fb5a236d7a7334
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
 
-PODFILE CHECKSUM: 001577b98f777dbe30781b07ff15610245c582f5
+PODFILE CHECKSUM: 727bbe0a60ae02635bc763d2841bb1db341115f7
 
 COCOAPODS: 1.11.2

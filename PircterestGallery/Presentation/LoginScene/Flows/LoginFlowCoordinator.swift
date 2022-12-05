@@ -32,7 +32,6 @@ final class LoginFlowCoordinator: Coordinator {
     func start() {
         let vc = dependencies.makeLoginViewController(coordinator: self)
         self.window.rootViewController = vc
-        //navigationController.pushViewController(vc, animated: true)
         loginViewController = vc
     }
 }

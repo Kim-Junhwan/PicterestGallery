@@ -7,6 +7,7 @@
 
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
-
+API_BASE_URL = api.unsplash.com
 KAKAO_NATIVE_APP_KEY = 0aea2334d596c3f9e23abeb903678361
 GOOGLE_NATIVE_APP_KEY = 311803332457-sjfuh298vua7cas9heldk2528ksu0jni.apps.googleusercontent.com
+PICTEREST_NATIVE_APP_KEY = OWmMvrXNsNYnAgs-bsf8l4LfEdfvkTbgCT4H2hZV_a0
