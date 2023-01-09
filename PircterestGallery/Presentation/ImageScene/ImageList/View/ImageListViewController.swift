@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class ImageListViewController: UIViewController, StoryboardInstatiable {
     
@@ -14,6 +16,8 @@ final class ImageListViewController: UIViewController, StoryboardInstatiable {
     @IBOutlet weak var imageCollectionContainer: UIView!
     private var searchController = UISearchController(searchResultsController: nil)
     var viewModel: ImageListViewModel?
+    
+    private var imageCollectionViewController: ImageListCollectionViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +31,16 @@ final class ImageListViewController: UIViewController, StoryboardInstatiable {
         return view
     }
     
+    private func bind() {
+        
+    }
+    
     private func setupViews() {
         setupSearchController()
+    }
+    
+    private func updateItems() {
+        imageCollectionViewController?.reload()
     }
 }
 

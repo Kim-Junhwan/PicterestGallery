@@ -36,7 +36,7 @@ extension NetworkService: TargetType {
     var task: Moya.Task {
         switch self {
         case .searchImageList(let query, let page):
-            return .requestParameters(parameters: ["query":query, "page":page], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["query":query.query, "page":page], encoding: JSONEncoding.default)
         case .fetchRecommendImageList:
             return .requestPlain
         }

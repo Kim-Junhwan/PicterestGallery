@@ -8,22 +8,22 @@
 import Foundation
 
 struct ImagesResponseDTO: Decodable {
-    let images: [ImageDTO]
+    let results: [ImageDTO]
 }
 
 struct ImageDTO: Decodable {
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case width
-        case height
-        case imagePath = "urls"
-    }
+//    private enum CodingKeys: String, CodingKey {
+//        case id
+//        case width
+//        case height
+//        case imagePath = "urls"
+//    }
     
     struct ImagePathDTO: Decodable {
         let small: String
     }
-    let id: String
-    let width: Int
-    let height: Int
-    let imagePath: ImagePathDTO
+    let id: String?
+    let width: Int?
+    let height: Int?
+    let urls: ImagePathDTO
 }

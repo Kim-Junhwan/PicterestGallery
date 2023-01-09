@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import Moya
+import RxCocoa
 
 protocol ImageListViewModelInput {
     func showRecommendImage()
@@ -15,12 +16,19 @@ protocol ImageListViewModelInput {
 }
 
 protocol ImageListViewModelOutput {
+    var fetching: Driver<[PicterestImage]> { get }
 }
 
 protocol ImageListViewModel: ImageListViewModelInput, ImageListViewModelOutput {}
 
 class DefaultImageListViewModel: ImageListViewModel {
+    var fetching: Driver<[PicterestImage]> {
+        return movies.asDriver()
+    }
+    
+    private var movies: BehaviorRelay<[PicterestImage]> = BehaviorRelay(value: [])
     let provider = MoyaProvider<NetworkService>()
+    
 }
 
 extension DefaultImageListViewModel {
@@ -28,23 +36,32 @@ extension DefaultImageListViewModel {
     func showRecommendImage()  {
         provider.request(.fetchRecommendImageList) { result in
             switch result {
-            case .success(let response):
+            case .success(let response) :
                 do {
-                   let abc = try JSONDecoder().decode([ImageDTO].self, from: response.data)
-                    print("Images: \(abc)")
-                } catch let error{
-                    print(error)
+                    let data = try JSONDecoder().decode(ImagesResponseDTO.self, from: response.data)
+                    print("fetch response: \(data)")
+                } catch {
+                    print("decoding error \(error.localizedDescription)")
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .failure(let error) :
+                print("Fetch recommend List Error: \(error.localizedDescription)")
             }
         }
     }
     
-    func didSearch(query: String) {
-        print(query)
+    private func resetPage() {
+        
+    }
+    
+    func didSearch(query: String)  {
         provider.request(.searchImageList(query: ImageQuery(query: query), page: 1)) { result in
-            print(result)
+            switch result {
+            case .success(let response) :
+                print(response)
+            case .failure(let error) :
+                print("Search Error: \(error.localizedDescription)")
+            }
         }
     }
+    
 }
