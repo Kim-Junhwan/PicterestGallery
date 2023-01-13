@@ -23,7 +23,7 @@ extension NetworkService: TargetType {
     var path: String {
         switch self {
         case .fetchRecommendImageList:
-            return "/photos"
+            return "/photos/random"
         case .searchImageList(_):
             return "/search/photos"
         }
@@ -36,9 +36,9 @@ extension NetworkService: TargetType {
     var task: Moya.Task {
         switch self {
         case .searchImageList(let query, let page):
-            return .requestParameters(parameters: ["query":query.query, "page":page], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["query":query.query, "page":page], encoding: URLEncoding.queryString)
         case .fetchRecommendImageList:
-            return .requestPlain
+            return .requestParameters(parameters: ["count":10], encoding: URLEncoding.queryString)
         }
     }
     

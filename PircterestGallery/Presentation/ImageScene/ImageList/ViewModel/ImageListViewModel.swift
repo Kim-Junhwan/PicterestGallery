@@ -57,9 +57,14 @@ extension DefaultImageListViewModel {
         provider.request(.searchImageList(query: ImageQuery(query: query), page: 1)) { result in
             switch result {
             case .success(let response) :
-                print(response)
+                do {
+                    let data = try JSONDecoder().decode(ImagesResponseDTO.self, from: response.data)
+                    
+                } catch {
+                    print("decoding error \(error.localizedDescription)")
+                }
             case .failure(let error) :
-                print("Search Error: \(error.localizedDescription)")
+                print("Fetch recommend List Error: \(error.localizedDescription)")
             }
         }
     }
