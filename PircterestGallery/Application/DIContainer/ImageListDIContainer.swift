@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Moya
 
 final class ImageListDIContainer {
     func makeImageListFlowCoordinator() -> ImageListFlowCoordinator {
@@ -14,7 +15,11 @@ final class ImageListDIContainer {
     }
     
     func makeImageListViewModel() -> ImageListViewModel {
-        return DefaultImageListViewModel()
+        return DefaultImageListViewModel(searchImageUseCase: DefaultSearchImageUseCase(provider: makeNetworkServiceMoyaProvider()))
+    }
+    
+    func makeNetworkServiceMoyaProvider() -> MoyaProvider<NetworkService> {
+        return MoyaProvider<NetworkService>()
     }
 }
 

@@ -12,12 +12,12 @@ struct ImagesResponseDTO: Decodable {
 }
 
 struct ImageDTO: Decodable {
-//    private enum CodingKeys: String, CodingKey {
-//        case id
-//        case width
-//        case height
-//        case imagePath = "urls"
-//    }
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case width
+        case height
+        case imagePath = "urls"
+    }
     
     struct ImagePathDTO: Decodable {
         let small: String
@@ -25,5 +25,9 @@ struct ImageDTO: Decodable {
     let id: String?
     let width: Int?
     let height: Int?
-    let urls: ImagePathDTO
+    let imagePath: ImagePathDTO?
+}
+
+extension ImagesResponseDTO {
+    func toDomain() 
 }

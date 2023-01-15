@@ -46,6 +46,4 @@ extension NetworkService: TargetType {
         let nativeAppKey = Bundle.main.infoDictionary?["PICTEREST_NATIVE_APP_KEY"] as? String
         return ["Authorization":"Client-ID \(nativeAppKey!)"]
     }
-    
-    
 }

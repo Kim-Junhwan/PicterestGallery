@@ -15,5 +15,7 @@ struct PicterestImage: Identifiable {
 }
 
 struct ImagesPage {
+    let page: Int
+    let totalPage: Int
     let images: [PicterestImage]
 }

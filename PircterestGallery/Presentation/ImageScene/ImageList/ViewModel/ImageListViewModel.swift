@@ -16,37 +16,35 @@ protocol ImageListViewModelInput {
 }
 
 protocol ImageListViewModelOutput {
-    var fetching: Driver<[PicterestImage]> { get }
+    var fetching: Driver<[ImagesPage]> { get }
 }
 
 protocol ImageListViewModel: ImageListViewModelInput, ImageListViewModelOutput {}
 
 class DefaultImageListViewModel: ImageListViewModel {
-    var fetching: Driver<[PicterestImage]> {
+    
+    private let searchImageUseCase: SearchImageUseCase
+    
+    var currentPage: Int = 0
+    var totalPageCount: Int = 1
+    var hasMorePage: Bool { currentPage < totalPageCount }
+    var nextPage: Int { hasMorePage ? currentPage+1 : currentPage }
+    
+    private var movies: BehaviorRelay<[ImagesPage]> = BehaviorRelay(value: [])
+    
+    var fetching: Driver<[ImagesPage]> {
         return movies.asDriver()
     }
     
-    private var movies: BehaviorRelay<[PicterestImage]> = BehaviorRelay(value: [])
-    let provider = MoyaProvider<NetworkService>()
+    init(searchImageUseCase: SearchImageUseCase) {
+        self.searchImageUseCase = searchImageUseCase
+    }
     
 }
 
 extension DefaultImageListViewModel {
     
     func showRecommendImage()  {
-        provider.request(.fetchRecommendImageList) { result in
-            switch result {
-            case .success(let response) :
-                do {
-                    let data = try JSONDecoder().decode(ImagesResponseDTO.self, from: response.data)
-                    print("fetch response: \(data)")
-                } catch {
-                    print("decoding error \(error.localizedDescription)")
-                }
-            case .failure(let error) :
-                print("Fetch recommend List Error: \(error.localizedDescription)")
-            }
-        }
     }
     
     private func resetPage() {
@@ -54,19 +52,10 @@ extension DefaultImageListViewModel {
     }
     
     func didSearch(query: String)  {
-        provider.request(.searchImageList(query: ImageQuery(query: query), page: 1)) { result in
-            switch result {
-            case .success(let response) :
-                do {
-                    let data = try JSONDecoder().decode(ImagesResponseDTO.self, from: response.data)
-                    
-                } catch {
-                    print("decoding error \(error.localizedDescription)")
-                }
-            case .failure(let error) :
-                print("Fetch recommend List Error: \(error.localizedDescription)")
+        searchImageUseCase.excute(query: ImageQuery(query: query), page: nextPage)
+            .subscribe { imagesPage in
+                self.movies.accept(imagesPage)
             }
-        }
     }
     
 }
