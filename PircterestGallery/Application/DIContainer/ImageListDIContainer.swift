@@ -15,7 +15,7 @@ final class ImageListDIContainer {
     }
     
     func makeImageListViewModel() -> ImageListViewModel {
-        return DefaultImageListViewModel(searchImageUseCase: DefaultSearchImageUseCase(provider: makeNetworkServiceMoyaProvider()))
+        return DefaultImageListViewModel(searchImageUseCase: DefaultSearchImageUseCase(provider: makeNetworkServiceMoyaProvider()), fetchRecommendImageUseCase: DefaultFetchRecommendImageUseCase(provider: makeNetworkServiceMoyaProvider()))
     }
     
     func makeNetworkServiceMoyaProvider() -> MoyaProvider<NetworkService> {

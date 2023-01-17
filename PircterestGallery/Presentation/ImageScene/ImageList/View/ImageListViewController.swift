@@ -22,6 +22,7 @@ final class ImageListViewController: UIViewController, StoryboardInstatiable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        bind()
         viewModel?.showRecommendImage()
     }
     
@@ -32,7 +33,9 @@ final class ImageListViewController: UIViewController, StoryboardInstatiable {
     }
     
     private func bind() {
-        
+        viewModel?.fetching.drive(onNext: { imagesPage in
+            print(imagesPage)
+        })
     }
     
     private func setupViews() {

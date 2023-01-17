@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7290D5929753E7600363A57 /* FetchRecommendImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7290D5829753E7600363A57 /* FetchRecommendImageUseCase.swift */; };
 		C7498B68290EC6600010882F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498B67290EC6600010882F /* User.swift */; };
 		C7498B6A290EC6D50010882F /* PicterestImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498B69290EC6D50010882F /* PicterestImage.swift */; };
 		C7498B6D290EC7EA0010882F /* ImagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7498B6C290EC7EA0010882F /* ImagesRepository.swift */; };
@@ -55,6 +56,7 @@
 		4906D2C9614A9E00A7E3BFAF /* Pods-PircterestGallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PircterestGallery.debug.xcconfig"; path = "Target Support Files/Pods-PircterestGallery/Pods-PircterestGallery.debug.xcconfig"; sourceTree = "<group>"; };
 		90FDA1E11A1F82E20141FD2D /* Pods_PircterestGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PircterestGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C83E1698022D83E0323AB25 /* Pods-PircterestGallery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PircterestGallery.release.xcconfig"; path = "Target Support Files/Pods-PircterestGallery/Pods-PircterestGallery.release.xcconfig"; sourceTree = "<group>"; };
+		C7290D5829753E7600363A57 /* FetchRecommendImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecommendImageUseCase.swift; sourceTree = "<group>"; };
 		C7498B67290EC6600010882F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C7498B69290EC6D50010882F /* PicterestImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicterestImage.swift; sourceTree = "<group>"; };
 		C7498B6C290EC7EA0010882F /* ImagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesRepository.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			children = (
 				C7498B73290ED08B0010882F /* LoginUseCase.swift */,
 				C7E19C142972F5E100BCFDCD /* SearchImageUseCase.swift */,
+				C7290D5829753E7600363A57 /* FetchRecommendImageUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				C7498B79290ED3690010882F /* AppFlowCoordinator.swift in Sources */,
 				C7498B7B290ED4650010882F /* AppDIContainer.swift in Sources */,
 				C7E19C152972F5E100BCFDCD /* SearchImageUseCase.swift in Sources */,
+				C7290D5929753E7600363A57 /* FetchRecommendImageUseCase.swift in Sources */,
 				C7498BB5291EABA50010882F /* UserInfoViewModel.swift in Sources */,
 				C7498C0E2929411E0010882F /* ImageListViewModel.swift in Sources */,
 				C7498B91290F84870010882F /* KakaoLoginRepository.swift in Sources */,

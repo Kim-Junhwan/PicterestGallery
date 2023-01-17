@@ -8,7 +8,7 @@ import Moya
 import RxSwift
 
 protocol SearchImageUseCase {
-    func excute(query: ImageQuery, page: Int) -> Observable<[ImagesPage]>
+    func excute(query: ImageQuery, page: Int) -> Observable<ImagesPage>
 }
 
 import Foundation
@@ -21,11 +21,13 @@ final class DefaultSearchImageUseCase: SearchImageUseCase {
         self.provider = provider
     }
     
-    func excute(query: ImageQuery, page: Int) -> Observable<[ImagesPage]> {
+    func excute(query: ImageQuery, page: Int) -> Observable<ImagesPage> {
         return provider.rx.request(.searchImageList(query: query, page: page))
             .asObservable()
             .map { try JSONDecoder().decode(ImagesResponseDTO.self, from: $0.data)}
-            .map {$0.results.}
+            .map { imageDTO in
+                imageDTO.toDomain(page: page)
+            }
 
     }
     
