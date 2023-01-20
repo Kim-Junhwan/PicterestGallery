@@ -16,7 +16,7 @@ protocol ImageListViewModelInput {
 }
 
 protocol ImageListViewModelOutput {
-    var fetching: Driver<[ImagesPage]> { get }
+    var fetching: Driver<[ImageListItemViewModel]> { get }
 }
 
 protocol ImageListViewModel: ImageListViewModelInput, ImageListViewModelOutput {}
@@ -31,9 +31,9 @@ class DefaultImageListViewModel: ImageListViewModel {
     var hasMorePage: Bool { currentPage < totalPageCount }
     var nextPage: Int { hasMorePage ? currentPage+1 : currentPage }
     
-    private var movies: BehaviorRelay<[ImagesPage]> = BehaviorRelay(value: [])
+    private var movies: BehaviorRelay<[ImageListItemViewModel]> = BehaviorRelay(value: [])
     
-    var fetching: Driver<[ImagesPage]> {
+    var fetching: Driver<[ImageListItemViewModel]> {
         return movies.asDriver()
     }
     
@@ -48,7 +48,10 @@ extension DefaultImageListViewModel {
     
     func showRecommendImage()  {
         fetchRecommendImageUseCase.excute().subscribe { imagesPage in
-            self.movies.accept([imagesPage])
+            imagesPage.map { page in
+                let result = page.images.map {ImageListItemViewModel(id: $0.id, width: $0.width, height: $0.height, imagePath: $0.imagePath)}
+                self.appendPage(imageList: result)
+            }
         }
     }
     
@@ -56,17 +59,19 @@ extension DefaultImageListViewModel {
         currentPage = 0
         totalPageCount = 1
         self.movies.accept([])
-        
     }
     
-    private func appendPage() {
-        
+    private func appendPage(imageList: [ImageListItemViewModel]) {
+        movies.accept(imageList)
     }
     
     func didSearch(query: String)  {
         searchImageUseCase.excute(query: ImageQuery(query: query), page: nextPage)
             .subscribe { imagesPage in
-                self.movies.accept([imagesPage])
+                imagesPage.map { page in
+                    let result = page.images.map {ImageListItemViewModel(id: $0.id, width: $0.width, height: $0.height, imagePath: $0.imagePath)}
+                    self.appendPage(imageList: result)
+                }
             }
     }
     

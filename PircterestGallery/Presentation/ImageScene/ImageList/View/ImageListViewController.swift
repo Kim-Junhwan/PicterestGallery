@@ -34,8 +34,16 @@ final class ImageListViewController: UIViewController, StoryboardInstatiable {
     
     private func bind() {
         viewModel?.fetching.drive(onNext: { imagesPage in
-            print(imagesPage)
+            self.imageCollectionViewController?.reload()
         })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == String(describing: ImageListCollectionViewController.self),
+            let destinationVC = segue.destination as? ImageListCollectionViewController {
+            imageCollectionViewController = destinationVC
+            self.imageCollectionViewController?.viewModel = viewModel
+        }
     }
     
     private func setupViews() {
