@@ -6,7 +6,8 @@
 //
 
 import Foundation
+import RxSwift
 
-protocol ImagesRepository {
-    func fetchImageList()
+protocol ImageRepository {
+    func fetchImage(url: String) -> Observable<UIImage>
 }

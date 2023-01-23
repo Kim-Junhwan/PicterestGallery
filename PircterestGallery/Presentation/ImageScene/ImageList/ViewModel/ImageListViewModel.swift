@@ -50,6 +50,7 @@ extension DefaultImageListViewModel {
         fetchRecommendImageUseCase.excute().subscribe { imagesPage in
             imagesPage.map { page in
                 let result = page.images.map {ImageListItemViewModel(id: $0.id, width: $0.width, height: $0.height, imagePath: $0.imagePath)}
+                print(result)
                 self.appendPage(imageList: result)
             }
         }
@@ -66,10 +67,12 @@ extension DefaultImageListViewModel {
     }
     
     func didSearch(query: String)  {
+        resetPage()
         searchImageUseCase.excute(query: ImageQuery(query: query), page: nextPage)
             .subscribe { imagesPage in
                 imagesPage.map { page in
                     let result = page.images.map {ImageListItemViewModel(id: $0.id, width: $0.width, height: $0.height, imagePath: $0.imagePath)}
+                    print(result)
                     self.appendPage(imageList: result)
                 }
             }

@@ -6,32 +6,30 @@
 //
 
 import UIKit
-
-private let reuseIdentifier = "Cell"
+import RxSwift
 
 class ImageListCollectionViewController: UICollectionViewController {
     
     var viewModel: ImageListViewModel?
+    
+    private var disposeBag = DisposeBag()
+    
+    var imageRepository: ImageRepository?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = nil
-        collectionView.delegate = nil
+        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = .zero
         collectionView.register(ImageListCollectionViewCell.self, forCellWithReuseIdentifier: ImageListCollectionViewCell.reuseIdentifier)
+        viewModel?.showRecommendImage()
+        bind()
+    }
+    
+    func bind() {
         viewModel?.fetching.drive(collectionView.rx.items(cellIdentifier: ImageListCollectionViewCell.reuseIdentifier, cellType: ImageListCollectionViewCell.self)) {  index, result, cell in
-            
-            URLSession.shared.dataTask(with: URLRequest(url: URL(string: result.imagePath)!)) { data, response, error in
-                if error != nil {
-                    print(error?.localizedDescription)
-                } else {
-                    print(data)
-                    DispatchQueue.main.async {
-                        cell.picterestImageView.image = UIImage(data: data!)
-                    }
-                }
-            }.resume()
-            
-        }
+            self.imageRepository?.fetchImage(url: result.imagePath).asDriver(onErrorJustReturn: UIImage(systemName: "circle")!).drive(cell.picterestImageView.rx.image)
+                .disposed(by: self.disposeBag)
+        }.disposed(by: disposeBag)
     }
     
     func reload() {
@@ -39,7 +37,7 @@ class ImageListCollectionViewController: UICollectionViewController {
     }
 }
  
-extension ImageListCollectionViewController: UICollectionViewDelegateFlowLayout{
+extension ImageListCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
     }

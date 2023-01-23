@@ -22,8 +22,6 @@ final class ImageListViewController: UIViewController, StoryboardInstatiable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        bind()
-        viewModel?.showRecommendImage()
     }
     
     static func create(viewModel: ImageListViewModel) -> ImageListViewController{
@@ -32,26 +30,17 @@ final class ImageListViewController: UIViewController, StoryboardInstatiable {
         return view
     }
     
-    private func bind() {
-        viewModel?.fetching.drive(onNext: { imagesPage in
-            self.imageCollectionViewController?.reload()
-        })
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == String(describing: ImageListCollectionViewController.self),
             let destinationVC = segue.destination as? ImageListCollectionViewController {
             imageCollectionViewController = destinationVC
+            imageCollectionViewController?.imageRepository = DefaultImageRepository()
             self.imageCollectionViewController?.viewModel = viewModel
         }
     }
     
     private func setupViews() {
         setupSearchController()
-    }
-    
-    private func updateItems() {
-        imageCollectionViewController?.reload()
     }
 }
 
