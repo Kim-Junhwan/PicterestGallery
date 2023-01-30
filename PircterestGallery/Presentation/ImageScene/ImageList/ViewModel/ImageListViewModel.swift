@@ -17,6 +17,7 @@ protocol ImageListViewModelInput {
 
 protocol ImageListViewModelOutput {
     var fetching: Driver<[ImageListItemViewModel]> { get }
+    var isLoading: BehaviorRelay<Bool> { get }
 }
 
 protocol ImageListViewModel: ImageListViewModelInput, ImageListViewModelOutput {}
@@ -30,8 +31,10 @@ class DefaultImageListViewModel: ImageListViewModel {
     var totalPageCount: Int = 1
     var hasMorePage: Bool { currentPage < totalPageCount }
     var nextPage: Int { hasMorePage ? currentPage+1 : currentPage }
+    var isLoading: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     private var movies: BehaviorRelay<[ImageListItemViewModel]> = BehaviorRelay(value: [])
+    private var disposeBag = DisposeBag()
     
     var fetching: Driver<[ImageListItemViewModel]> {
         return movies.asDriver()
@@ -47,13 +50,15 @@ class DefaultImageListViewModel: ImageListViewModel {
 extension DefaultImageListViewModel {
     
     func showRecommendImage()  {
+        isLoading.accept(true)
         fetchRecommendImageUseCase.excute().subscribe { imagesPage in
             imagesPage.map { page in
                 let result = page.images.map {ImageListItemViewModel(id: $0.id, width: $0.width, height: $0.height, imagePath: $0.imagePath)}
                 print(result)
+                self.isLoading.accept(false)
                 self.appendPage(imageList: result)
             }
-        }
+        }.disposed(by: disposeBag)
     }
     
     private func resetPage() {
@@ -67,15 +72,15 @@ extension DefaultImageListViewModel {
     }
     
     func didSearch(query: String)  {
-        resetPage()
+        isLoading.accept(true)
         searchImageUseCase.excute(query: ImageQuery(query: query), page: nextPage)
             .subscribe { imagesPage in
                 imagesPage.map { page in
                     let result = page.images.map {ImageListItemViewModel(id: $0.id, width: $0.width, height: $0.height, imagePath: $0.imagePath)}
-                    print(result)
                     self.appendPage(imageList: result)
+                    self.isLoading.accept(false)
                 }
-            }
+            }.disposed(by: disposeBag)
     }
     
 }

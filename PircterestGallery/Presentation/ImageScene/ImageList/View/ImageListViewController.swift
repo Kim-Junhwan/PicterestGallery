@@ -17,11 +17,20 @@ final class ImageListViewController: UIViewController, StoryboardInstatiable {
     private var searchController = UISearchController(searchResultsController: nil)
     var viewModel: ImageListViewModel?
     
+    private let disposeBag = DisposeBag()
+    
     private var imageCollectionViewController: ImageListCollectionViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
         setupViews()
+    }
+    
+    private func bind() {
+        viewModel?.isLoading.asObservable().subscribe(onNext: { element in
+            self.updateLoading(element)
+        }).disposed(by: disposeBag)
     }
     
     static func create(viewModel: ImageListViewModel) -> ImageListViewController{
@@ -41,6 +50,14 @@ final class ImageListViewController: UIViewController, StoryboardInstatiable {
     
     private func setupViews() {
         setupSearchController()
+    }
+    
+    private func updateLoading(_ loading: Bool) {
+        if loading {
+            LoadingView.show()
+        } else {
+            LoadingView.hide()
+        }
     }
 }
 

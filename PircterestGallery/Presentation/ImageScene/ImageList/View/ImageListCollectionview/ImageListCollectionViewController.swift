@@ -19,7 +19,6 @@ class ImageListCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = nil
-        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = .zero
         collectionView.register(ImageListCollectionViewCell.self, forCellWithReuseIdentifier: ImageListCollectionViewCell.reuseIdentifier)
         viewModel?.showRecommendImage()
         bind()

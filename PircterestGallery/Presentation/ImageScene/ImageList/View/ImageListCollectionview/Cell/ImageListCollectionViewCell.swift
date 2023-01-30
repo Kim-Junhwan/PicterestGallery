@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import RxSwift
 
 class ImageListCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "ImageListCollectionReusableCell"
+    private var viewModel: ImageListItemViewModel?
+    private var imageRepository: ImageRepository?
     
     lazy var picterestImageView: UIImageView = {
         let imageView = UIImageView()
