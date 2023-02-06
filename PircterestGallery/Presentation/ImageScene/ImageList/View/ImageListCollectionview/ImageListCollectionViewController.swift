@@ -12,15 +12,20 @@ class ImageListCollectionViewController: UICollectionViewController {
     
     var viewModel: ImageListViewModel?
     
+    var imageList: [ImageListItemViewModel] = []
+    
     private var disposeBag = DisposeBag()
     
     var imageRepository: ImageRepository?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let layout = MosaicLayout()
         collectionView.dataSource = nil
         collectionView.register(ImageListCollectionViewCell.self, forCellWithReuseIdentifier: ImageListCollectionViewCell.reuseIdentifier)
         viewModel?.showRecommendImage()
+        collectionView.collectionViewLayout = layout
+        layout.delegate = self
         bind()
     }
     
@@ -29,15 +34,28 @@ class ImageListCollectionViewController: UICollectionViewController {
             self.imageRepository?.fetchImage(url: result.imagePath).asDriver(onErrorJustReturn: UIImage(systemName: "circle")!).drive(cell.picterestImageView.rx.image)
                 .disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
+        viewModel?.fetching.drive(onNext: { list in
+            self.imageList = list
+            self.reload()
+        })
     }
     
     func reload() {
         collectionView.reloadData()
     }
 }
- 
-extension ImageListCollectionViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+
+extension ImageListCollectionViewController: MosaicLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, contentWidth: CGFloat) -> CGFloat {
+        let imageHeight = CGFloat(imageList[indexPath.item].height)
+        let imageWidth = CGFloat(imageList[indexPath.item].width)
+        let convertHeight = (imageHeight * contentWidth) / imageWidth
+        return convertHeight
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath) -> CGFloat {
+        return CGFloat(imageList[indexPath.item].height)
+    }
+    
 }

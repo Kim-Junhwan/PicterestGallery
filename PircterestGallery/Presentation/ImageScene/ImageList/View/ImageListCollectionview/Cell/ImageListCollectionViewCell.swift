@@ -16,9 +16,8 @@ class ImageListCollectionViewCell: UICollectionViewCell {
     
     lazy var picterestImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
         return imageView
     }()
     
@@ -32,17 +31,18 @@ class ImageListCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
-        
         self.contentView.addSubview(picterestImageView)
+        contentView.layer.cornerRadius = 10
+        contentView.layer.masksToBounds = true
         self.contentView.backgroundColor = .green
+        layer.cornerRadius = 10
+        layer.masksToBounds = false
         NSLayoutConstraint.activate([
             picterestImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             picterestImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            picterestImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            picterestImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
+            picterestImageView.topAnchor.constraint(equalTo: self.topAnchor),
+            picterestImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
-        
     }
     
 }

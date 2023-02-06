@@ -54,7 +54,6 @@ extension DefaultImageListViewModel {
         fetchRecommendImageUseCase.excute().subscribe { imagesPage in
             imagesPage.map { page in
                 let result = page.images.map {ImageListItemViewModel(id: $0.id, width: $0.width, height: $0.height, imagePath: $0.imagePath)}
-                print(result)
                 self.isLoading.accept(false)
                 self.appendPage(imageList: result)
             }

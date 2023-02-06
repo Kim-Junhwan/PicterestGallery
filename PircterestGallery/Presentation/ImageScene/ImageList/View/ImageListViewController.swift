@@ -23,6 +23,8 @@ final class ImageListViewController: UIViewController, StoryboardInstatiable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //title = "PicterestImage"
+        //navigationController?.navigationBar.prefersLargeTitles = true
         bind()
         setupViews()
     }
