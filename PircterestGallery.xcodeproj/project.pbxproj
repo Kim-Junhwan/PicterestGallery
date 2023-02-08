@@ -46,6 +46,7 @@
 		C75E1A3C2938FB9000778CD1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75E1A3B2938FB9000778CD1 /* NetworkService.swift */; };
 		C75E1A3F293D956100778CD1 /* ImagesResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75E1A3E293D956100778CD1 /* ImagesResponseDTO.swift */; };
 		C7670E9C298E97F200E3CD77 /* MosaicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7670E9B298E97F200E3CD77 /* MosaicLayout.swift */; };
+		C7670E9E2992B3E800E3CD77 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7670E9D2992B3E800E3CD77 /* CacheManager.swift */; };
 		C7ADAE7129719530003F1B1B /* ImageListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ADAE7029719530003F1B1B /* ImageListCollectionViewCell.swift */; };
 		C7E19C132972E62B00BCFDCD /* ImageListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E19C122972E62B00BCFDCD /* ImageListItemViewModel.swift */; };
 		C7E19C152972F5E100BCFDCD /* SearchImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E19C142972F5E100BCFDCD /* SearchImageUseCase.swift */; };
@@ -100,6 +101,7 @@
 		C75E1A3B2938FB9000778CD1 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		C75E1A3E293D956100778CD1 /* ImagesResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesResponseDTO.swift; sourceTree = "<group>"; };
 		C7670E9B298E97F200E3CD77 /* MosaicLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MosaicLayout.swift; sourceTree = "<group>"; };
+		C7670E9D2992B3E800E3CD77 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		C7ADAE7029719530003F1B1B /* ImageListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7E19C122972E62B00BCFDCD /* ImageListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListItemViewModel.swift; sourceTree = "<group>"; };
 		C7E19C142972F5E100BCFDCD /* SearchImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchImageUseCase.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				C7498B84290EEF000010882F /* Protocols */,
 				C7290D5F2980269900363A57 /* LoadingView.swift */,
+				C7670E9D2992B3E800E3CD77 /* CacheManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -625,6 +628,7 @@
 				C7670E9C298E97F200E3CD77 /* MosaicLayout.swift in Sources */,
 				C7498BC22923561A0010882F /* ImageListViewController.swift in Sources */,
 				C7498C092926A1CC0010882F /* ImageListFlowCoordinator.swift in Sources */,
+				C7670E9E2992B3E800E3CD77 /* CacheManager.swift in Sources */,
 				C7498B89290F717F0010882F /* LoginFlowCoordinator.swift in Sources */,
 				C7498BA3291812CB0010882F /* TabBarCoordinator.swift in Sources */,
 				C7498B6F290EC8830010882F /* ImageQuery.swift in Sources */,

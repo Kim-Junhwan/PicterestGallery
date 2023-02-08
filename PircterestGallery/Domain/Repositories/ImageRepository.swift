@@ -11,3 +11,4 @@ import RxSwift
 protocol ImageRepository {
     func fetchImage(url: String) -> Observable<UIImage>
 }
+

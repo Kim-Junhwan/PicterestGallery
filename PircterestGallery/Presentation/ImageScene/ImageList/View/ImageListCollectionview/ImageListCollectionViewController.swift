@@ -31,13 +31,18 @@ class ImageListCollectionViewController: UICollectionViewController {
     
     func bind() {
         viewModel?.fetching.drive(collectionView.rx.items(cellIdentifier: ImageListCollectionViewCell.reuseIdentifier, cellType: ImageListCollectionViewCell.self)) {  index, result, cell in
-            self.imageRepository?.fetchImage(url: result.imagePath).asDriver(onErrorJustReturn: UIImage(systemName: "circle")!).drive(cell.picterestImageView.rx.image)
-                .disposed(by: self.disposeBag)
+            if let cellImage = CacheManager.shared.getCacheImage(id: result.id) {
+                cell.picterestImageView.image = cellImage
+            } else {
+                self.imageRepository?.fetchImage(url: result.imagePath).asDriver(onErrorJustReturn: UIImage(systemName: "circle")!).drive(onNext: { fetchImage in
+                    cell.picterestImageView.image = fetchImage
+                    CacheManager.shared.saveCacheImage(id: result.id, fetchImage)
+                }).disposed(by: self.disposeBag)
+            }
         }.disposed(by: disposeBag)
         viewModel?.fetching.drive(onNext: { list in
             self.imageList = list
-            self.reload()
-        })
+        }).disposed(by: disposeBag)
     }
     
     func reload() {
@@ -52,7 +57,6 @@ extension ImageListCollectionViewController: MosaicLayoutDelegate {
         let convertHeight = (imageHeight * contentWidth) / imageWidth
         return convertHeight
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath) -> CGFloat {
         return CGFloat(imageList[indexPath.item].height)

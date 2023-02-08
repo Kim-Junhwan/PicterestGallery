@@ -55,12 +55,11 @@
         <!--Image List Collection View Controller-->
         <scene sceneID="rKw-7B-GFm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9uO-ks-rYU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <collectionViewController id="3Ke-sO-ECZ" customClass="ImageListCollectionViewController" customModule="PircterestGallery" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="aTC-dN-XyC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="707"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.90588235289999997" green="0.29803921570000003" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <viewLayoutGuide key="contentLayoutGuide" id="Clr-Fe-ERd"/>
                         <viewLayoutGuide key="frameLayoutGuide" id="WIH-ZU-ie7"/>
                         <collectionViewLayout key="collectionViewLayout" id="p26-ua-xSf"/>
@@ -71,6 +70,7 @@
                         </connections>
                     </collectionView>
                 </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9uO-ks-rYU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1226" y="-28"/>
         </scene>

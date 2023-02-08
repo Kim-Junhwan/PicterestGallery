@@ -34,14 +34,13 @@ class ImageListCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(picterestImageView)
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
-        self.contentView.backgroundColor = .green
         layer.cornerRadius = 10
         layer.masksToBounds = false
         NSLayoutConstraint.activate([
             picterestImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             picterestImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            picterestImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            picterestImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            picterestImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            picterestImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
     
